@@ -1,0 +1,82 @@
+Question 
+1 
+CREATE VIEW employee_info AS
+SELECT e.emp_no, e.last_name, e.first_name, e.sex, s.salary
+FROM employees AS e
+LEFT JOIN salaries AS s
+ON e.emp_no = s.salary;
+
+
+2
+SELECT first_name, last_name,  hire_date 
+FROM employees
+WHERE hire_date BETWEEN '1986-01-01' AND '1986-12-31';
+
+--DATE FORMAT IN SQL- YEAR-MONTH-DAY
+
+
+-- NB: USse ALTER DATABASE homewk_db SET datestyle TO ‘ISO, MDY’; to change the date format
+
+
+3. CREATE VIEW manager_info AS
+SELECT m.dept_no, d.depart_name, m.emp_no, e.last_name, e.first_name
+FROM dept_manager AS m
+LEFT JOIN departments AS d
+ON m.dept_no = d.dept_no
+LEFT JOIN dept_emp AS de
+ON d.dept_no = de.dept_no
+LEFT JOIN employees AS e
+ON de.emp_no = e.emp_no;
+
+
+4.
+CREATE VIEW dept_info AS
+SELECT de.emp_no, e.last_name, e.first_name, d.depart_name
+FROM departments AS d
+LEFT JOIN dept_emp AS de
+ON d.dept_no = de.dept_no
+LEFT JOIN employees AS e
+ON de.emp_no = e.emp_no;
+
+
+
+5.
+
+CREATE VIEW employees_hercules_b AS
+SELECT first_name, last_name, sex 
+FROM employees
+WHERE first_name = 'Hercules' AND last_name LIKE 'B%';
+
+
+6.
+
+CREATE VIEW employee_sales AS
+SELECT de.emp_no, e.last_name, e.first_name, d.depart_name
+FROM departments AS d
+LEFT JOIN dept_emp AS de
+ON d.dept_no = de.dept_no
+LEFT JOIN employees AS e
+ON de.emp_no = e.emp_no
+WHERE depart_name = 'Sales'
+
+
+7.
+CREATE VIEW employee_sales_development AS
+SELECT de.emp_no, e.last_name, e.first_name, d.depart_name
+FROM departments AS d
+LEFT JOIN dept_emp AS de
+ON d.dept_no = de.dept_no
+LEFT JOIN employees AS e
+ON de.emp_no = e.emp_no
+WHERE depart_name IN ('Sales', 'Development')
+
+
+8.
+CREATE VIEW last_name_count AS
+SELECT last_name, COUNT(last_name)
+FROM employees
+GROUP BY last_name;
+
+
+
+
